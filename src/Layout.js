@@ -33,7 +33,7 @@ export default function LayoutView(props) {
               history.push('/foraging');
             }}
           >
-            <Icon type="Foraging" />
+            <Icon type="environment" />
             <span
               className="nav-text"
               onClick={e => {
@@ -49,7 +49,7 @@ export default function LayoutView(props) {
               history.push('/farm');
             }}
           >
-            <Icon type="Farm" />
+            <Icon type="home" />
             <span className="nav-text">Farm</span>
           </Menu.Item>
         </Menu>
