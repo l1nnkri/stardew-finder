@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import MapViewer from './components/MapViewer';
+import Layout from './Layout';
+import HandleFileDrop from './components/HandleFileDrop';
+import Store from './Store';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Store.Container>
+        <Layout>
+          <HandleFileDrop>
+            <Switch>
+              <Route path="/foraging">
+                <MapViewer />
+              </Route>
+              <Route path="/farm">
+                <h1>Hei</h1>
+              </Route>
+            </Switch>
+          </HandleFileDrop>
+        </Layout>
+      </Store.Container>
+    </Router>
   );
 }
 
