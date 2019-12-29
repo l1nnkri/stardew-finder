@@ -1,6 +1,6 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import Store from './Store';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -37,14 +37,7 @@ export default function LayoutView(props) {
             }}
           >
             <Icon type="environment" />
-            <span
-              className="nav-text"
-              onClick={e => {
-                history.push('/foraging');
-              }}
-            >
-              Foraging
-            </span>
+            <span className="nav-text">Foraging</span>
           </Menu.Item>
           <Menu.Item
             key="farm"

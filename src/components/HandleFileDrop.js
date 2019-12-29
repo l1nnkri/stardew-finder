@@ -1,12 +1,18 @@
 import React from 'react';
 import parser from 'fast-xml-parser';
-import { isValidLocation, isForageItem, MAPS } from '../utils';
+import { withRouter } from 'react-router-dom';
+import { isValidLocation, isForageItem, MAP_IMAGES } from '../utils';
 import Store from '../Store';
 
 class HandleFileDrop extends React.Component {
   state = {
     locations: {},
+    isDraggingFile: false,
   };
+
+  componentDidMount() {
+    console.log(this.props.match.params);
+  }
 
   onDrop = ev => {
     ev.preventDefault();
@@ -15,7 +21,7 @@ class HandleFileDrop extends React.Component {
       if (item.kind === 'file') {
         var file = item.getAsFile();
         const reader = new FileReader();
-        reader.onload = theFile => {
+        reader.onload = async theFile => {
           const { result } = theFile.currentTarget;
           const json = parser.parse(result, {
             ignoreAttributes: false,
@@ -31,7 +37,7 @@ class HandleFileDrop extends React.Component {
           this.props.store.set('info')(info);
           // Parse locations
           const locations = json.SaveGame.locations.GameLocation.filter(
-            ({ name }) => isValidLocation(name) && MAPS[name]
+            ({ name }) => isValidLocation(name) && MAP_IMAGES[name]
           ).reduce((p, location) => {
             const name = location.name;
             location.objects = location.objects || { item: [] };
@@ -55,6 +61,7 @@ class HandleFileDrop extends React.Component {
           }, {});
           this.props.store.set('locations')(locations);
           this.props.store.set('gameState')(json.SaveGame);
+          this.setState({ isDraggingFile: false });
         };
         reader.readAsText(file);
       }
@@ -69,17 +76,25 @@ class HandleFileDrop extends React.Component {
       <div
         onDrop={this.onDrop}
         onDragOver={event => {
+          if (event.dataTransfer.items.length) {
+            this.setState({ isDraggingFile: true });
+          }
           event.preventDefault();
         }}
         style={{
           minHeight: '100vh',
           width: '100%',
+          background: this.state.isDraggingFile ? '#ccc' : '#fff',
         }}
       >
-        {this.props.children}
+        {this.state.isDraggingFile ? (
+          <h1>Drop file anywhere</h1>
+        ) : (
+          this.props.children
+        )}
       </div>
     );
   }
 }
 
-export default Store.withStore(HandleFileDrop);
+export default Store.withStore(withRouter(HandleFileDrop));

@@ -1,3 +1,13 @@
+import Backwoods from './img/Backwoods.png';
+import Beach from './img/Beach.png';
+import BusStop from './img/Bus_stop.png';
+import CindersapForest from './img/CindersapForest.png';
+import Desert from './img/Desert.png';
+import Farm from './img/Farm.png';
+import Mountain from './img/Mountain.png';
+import PelicanTown from './img/Pelican_Town.png';
+import Woods from './img/Woods.png';
+
 export const MAP_SIZES = {
   AnimalShop: { x: 35, y: 20 },
   ArchaeologyHouse: { x: 50, y: 20 },
@@ -337,16 +347,16 @@ export const MAP_SIZES = {
   Woods: { x: 60, y: 32 },
 };
 
-export const MAPS = {
-  Beach: 'Beach.png',
-  Backwoods: 'Backwoods.png',
-  BusStop: 'Bus_stop.png',
-  Forest: 'CindersapForest.png',
-  Desert: 'Desert.png',
-  Farm: 'Farm.png',
-  Mountain: 'Mountain.png',
-  Town: 'Pelican_Town.png',
-  Woods: 'Woods.png',
+export const MAP_IMAGES = {
+  Beach: Beach,
+  Backwoods: Backwoods,
+  BusStop: BusStop,
+  Forest: CindersapForest,
+  Desert: Desert,
+  Farm: Farm,
+  Mountain: Mountain,
+  Town: PelicanTown,
+  Woods: Woods,
 };
 
 export const isValidLocation = name => Object.keys(MAP_SIZES).includes(name);

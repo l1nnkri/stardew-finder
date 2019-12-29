@@ -1,13 +1,13 @@
 import React from 'react';
 import { Tooltip, Select } from 'antd';
 import 'antd/dist/antd.css';
-import { MAPS, MAP_SIZES } from '../utils';
+import { MAP_IMAGES, MAP_SIZES } from '../utils';
 import Store from '../Store';
 
 class MapViewer extends React.Component {
   state = {
     locations: {},
-    maps: Object.keys(MAPS),
+    maps: Object.keys(MAP_IMAGES),
   };
 
   onChange = values => {
@@ -17,7 +17,7 @@ class MapViewer extends React.Component {
   createMapElements = (maps, locations) => {
     const mapElements = maps.map(key => {
       const mapSize = MAP_SIZES[key];
-      const mapUrl = require(`../img/${MAPS[key]}`);
+      const mapUrl = MAP_IMAGES[key];
       const markers = (locations[key] || []).map(({ x, y, name }, idx) => {
         const top = (y / mapSize.y) * 100;
         const left = (x / mapSize.x) * 100;
@@ -89,7 +89,7 @@ class MapViewer extends React.Component {
             onChange={this.onChange}
             value={maps}
           >
-            {Object.keys(MAPS).map(key => {
+            {Object.keys(MAP_IMAGES).map(key => {
               return (
                 <Select.Option key={key} value={key}>
                   {key} [{(locations[key] || []).length}]

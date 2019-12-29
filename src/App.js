@@ -11,18 +11,14 @@ function App() {
   return (
     <Router>
       <Store.Container>
-        <Layout>
-          <HandleFileDrop>
+        <HandleFileDrop>
+          <Layout>
             <Switch>
-              <Route path="/foraging">
-                <MapViewer />
-              </Route>
-              <Route path="/farm">
-                <FarmView />
-              </Route>
+              <Route path="/foraging" component={MapViewer} />
+              <Route path="/farm" component={FarmView} />
             </Switch>
-          </HandleFileDrop>
-        </Layout>
+          </Layout>
+        </HandleFileDrop>
       </Store.Container>
     </Router>
   );

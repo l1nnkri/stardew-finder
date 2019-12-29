@@ -4,7 +4,6 @@ import Store from '../Store';
 import { REVERSE_ID_TABLE, MAP_SIZES } from '../utils';
 import { Tooltip, Checkbox, Popover, Divider } from 'antd';
 import ReactJsonView from 'react-json-view';
-import { uniqBy } from 'lodash';
 
 export default function FarmView(props) {
   const store = Store.useStore();
@@ -139,6 +138,7 @@ export default function FarmView(props) {
                 content={
                   <ReactJsonView
                     src={c}
+                    name={false}
                     collapsed={1}
                     displayDataTypes={false}
                     displayObjectSize={false}
@@ -151,6 +151,7 @@ export default function FarmView(props) {
                 <div
                   style={{
                     textAlign: 'center',
+                    cursor: 'pointer',
                     fontSize: '0.45rem',
                     height: `${(tileSize * mapSize.x) / mapSize.y}%`,
                     border: '1px solid black',
@@ -163,23 +164,6 @@ export default function FarmView(props) {
                 >
                   {c.daysToHarvest}
                 </div>
-                {/* <Icon
-                  type={
-                    c.dead
-                      ? 'minus-square'
-                      : c.done
-                      ? 'check-square'
-                      : 'close-square'
-                  }
-                  theme="outlined"
-                  style={{
-                    left: `${(c.key.Vector2.X / mapSize.x) * 100}%`,
-                    top: `${(c.key.Vector2.Y / mapSize.y) * 100}%`,
-                    position: 'absolute',
-                    width: `${tileSize}%`,
-                    color: c.dead ? '#000' : c.done ? '#52c41a' : '#eb2f96',
-                  }}
-                /> */}
               </Popover>
             </Tooltip>
           ))}
