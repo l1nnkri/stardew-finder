@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/martolini/stardew-finder/compare/v1.1.0...v1.1.1) (2019-12-29)
+
+
+### Bug Fixes
+
+* Change unheld object to empty instead of undefined ([6366a84](https://github.com/martolini/stardew-finder/commit/6366a8432092dbd780181c497e4159813ea07d9b))
+* mitigate .name undefined on heldobject ([fc996df](https://github.com/martolini/stardew-finder/commit/fc996df08123f857a6d51b58954c2886cacc5306))
+
 # [1.1.0](https://github.com/martolini/stardew-finder/compare/v1.0.0...v1.1.0) (2019-12-29)
 
 
