@@ -7,16 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Publish to surge.sh
-      uses: dswistowski/surge-sh-action@v1.0.0
+    - name: Setup node
+      uses: actions/setup-node@v1
       with:
-        # your surge.sh domain to deploy
-        domain: stardew-help.surge.sh
-        # surge.sh login
-        login: msroed
-        # surge.sh token, generate it with `surge token` command
-        token: ${{ secrets.ACCESS_TOKEN }}
-        # your project path
-        project: build
+        node-version: 10
+    - run: yarn
+    - run: yarn build
+    - run: npx surge build --token ${{ secrets.SURGE_TOKEN }}
