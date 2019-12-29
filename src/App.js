@@ -7,6 +7,10 @@ import FarmView from './components/FarmView';
 import Store from './Store';
 import './App.css';
 
+function Main() {
+  return <h1>Please drop a savefile in here anywhere</h1>;
+}
+
 function App() {
   return (
     <Router>
@@ -14,8 +18,9 @@ function App() {
         <HandleFileDrop>
           <Layout>
             <Switch>
-              <Route path="/foraging" component={MapViewer} />
-              <Route path="/farm" component={FarmView} />
+              <Route path="/" component={Main} exact />
+              <Route path={`/foraging`} component={MapViewer} exact />
+              <Route path={`/farm`} component={FarmView} exact />
             </Switch>
           </Layout>
         </HandleFileDrop>

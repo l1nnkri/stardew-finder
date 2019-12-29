@@ -1,13 +1,13 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Store from './Store';
+import KeepQueryLink from './components/KeepQueryLink';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function LayoutView(props) {
   const [collapsed, setCollapsed] = useState(true);
-  const history = useHistory();
   const location = useLocation();
   const store = Store.useStore();
   const info = store.get('info');
@@ -30,23 +30,17 @@ export default function LayoutView(props) {
           mode="inline"
           defaultSelectedKeys={[location.pathname.slice(1)]}
         >
-          <Menu.Item
-            key="foraging"
-            onClick={e => {
-              history.push('/foraging');
-            }}
-          >
-            <Icon type="environment" />
-            <span className="nav-text">Foraging</span>
+          <Menu.Item key="foraging">
+            <KeepQueryLink to="/foraging">
+              <Icon type="environment" />
+              <span className="nav-text">Foraging</span>
+            </KeepQueryLink>
           </Menu.Item>
-          <Menu.Item
-            key="farm"
-            onClick={e => {
-              history.push('/farm');
-            }}
-          >
-            <Icon type="home" />
-            <span className="nav-text">Farm</span>
+          <Menu.Item key="farm">
+            <KeepQueryLink to="/farm">
+              <Icon type="home" />
+              <span className="nav-text">Farm</span>
+            </KeepQueryLink>
           </Menu.Item>
         </Menu>
       </Sider>

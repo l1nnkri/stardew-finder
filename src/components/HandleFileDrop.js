@@ -3,6 +3,10 @@ import parser from 'fast-xml-parser';
 import { withRouter } from 'react-router-dom';
 import { isValidLocation, isForageItem, MAP_IMAGES } from '../utils';
 import Store from '../Store';
+import qs from 'query-string';
+import { storage } from '../firebase';
+import axios from 'axios';
+import hash from 'hash-sum';
 
 class HandleFileDrop extends React.Component {
   state = {
@@ -10,11 +14,57 @@ class HandleFileDrop extends React.Component {
     isDraggingFile: false,
   };
 
-  componentDidMount() {
-    console.log(this.props.match.params);
+  async componentDidMount() {
+    const farmId = qs.parse(this.props.location.search).id;
+    if (farmId) {
+      const downloadUrl = await storage
+        .ref()
+        .child(`farms/${farmId}`)
+        .getDownloadURL();
+      const result = await axios.get(downloadUrl);
+      const json = result.data;
+      await this.goCrazyWithJson(json);
+    }
   }
 
-  onDrop = ev => {
+  goCrazyWithJson(json) {
+    const info = {
+      currentSeason: json.SaveGame.currentSeason,
+      dayOfMonth: json.SaveGame.dayOfMonth,
+      dailyLuck: json.SaveGame.dailyLuck,
+      year: json.SaveGame.year,
+    };
+    this.props.store.set('info')(info);
+    // Parse locations
+    const locations = json.SaveGame.locations.GameLocation.filter(
+      ({ name }) => isValidLocation(name) && MAP_IMAGES[name]
+    ).reduce((p, location) => {
+      const name = location.name;
+      location.objects = location.objects || { item: [] };
+      location.objects = Array.isArray(location.objects.item)
+        ? location.objects
+        : { item: [location.objects.item] };
+      p[name] = location.objects.item
+        .map(item => {
+          const itemId = item.value.Object.parentSheetIndex;
+          if (!isForageItem(itemId)) {
+            return null;
+          }
+          return {
+            name: item.value.Object.name,
+            x: item.key.Vector2.X,
+            y: item.key.Vector2.Y,
+          };
+        })
+        .filter(l => !!l);
+      return p;
+    }, {});
+    this.props.store.set('locations')(locations);
+    this.props.store.set('gameState')(json.SaveGame);
+    this.setState({ isDraggingFile: false });
+  }
+
+  onDrop = async ev => {
     ev.preventDefault();
     if (ev.dataTransfer.items) {
       const item = ev.dataTransfer.items[0];
@@ -28,40 +78,20 @@ class HandleFileDrop extends React.Component {
             parseAttributeValue: true,
           });
           // Parse main info
-          const info = {
-            currentSeason: json.SaveGame.currentSeason,
-            dayOfMonth: json.SaveGame.dayOfMonth,
-            dailyLuck: json.SaveGame.dailyLuck,
-            year: json.SaveGame.year,
-          };
-          this.props.store.set('info')(info);
-          // Parse locations
-          const locations = json.SaveGame.locations.GameLocation.filter(
-            ({ name }) => isValidLocation(name) && MAP_IMAGES[name]
-          ).reduce((p, location) => {
-            const name = location.name;
-            location.objects = location.objects || { item: [] };
-            location.objects = Array.isArray(location.objects.item)
-              ? location.objects
-              : { item: [location.objects.item] };
-            p[name] = location.objects.item
-              .map(item => {
-                const itemId = item.value.Object.parentSheetIndex;
-                if (!isForageItem(itemId)) {
-                  return null;
-                }
-                return {
-                  name: item.value.Object.name,
-                  x: item.key.Vector2.X,
-                  y: item.key.Vector2.Y,
-                };
-              })
-              .filter(l => !!l);
-            return p;
-          }, {});
-          this.props.store.set('locations')(locations);
-          this.props.store.set('gameState')(json.SaveGame);
-          this.setState({ isDraggingFile: false });
+          await this.goCrazyWithJson(json);
+          const fileHash = hash(json);
+          // Upload if it doesn't exist
+          const ref = storage.ref().child(`farms/${fileHash}`);
+          try {
+            await ref.getDownloadURL();
+          } catch (ex) {
+            await ref.putString(JSON.stringify(json), undefined, {
+              contentType: 'application/json',
+            });
+          }
+          this.props.history.push(
+            `${this.props.location.pathname}?id=${fileHash}`
+          );
         };
         reader.readAsText(file);
       }
@@ -80,6 +110,10 @@ class HandleFileDrop extends React.Component {
             this.setState({ isDraggingFile: true });
           }
           event.preventDefault();
+        }}
+        onMouseUp={e => {
+          e.preventDefault();
+          this.setState({ isDraggingFile: false });
         }}
         style={{
           minHeight: '100vh',

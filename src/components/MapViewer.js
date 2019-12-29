@@ -39,7 +39,10 @@ class MapViewer extends React.Component {
         <div key={key}>
           <div>
             <h3>
-              <a name={key}>{key}</a>. Count: {markers.length}
+              <a name={key} href={`#${key}`}>
+                {key}
+              </a>
+              . Count: {markers.length}
             </h3>
           </div>
           <div
@@ -51,6 +54,7 @@ class MapViewer extends React.Component {
             }}
           >
             <img
+              alt={mapUrl}
               style={{ maxWidth: '100%', opacity: '50%' }}
               src={mapUrl}
               key={key}
