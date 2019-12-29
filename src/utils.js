@@ -679,6 +679,7 @@ export const ID_TABLE = {
   Sunflower: 421,
   'Purple Mushroom': 422,
   Rice: 423,
+  'Rice shoot': 271,
   Cheese: 424,
   'Fairy Seeds': 425,
   'Goat Cheese': 426,

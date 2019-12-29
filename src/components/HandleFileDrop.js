@@ -17,13 +17,28 @@ class HandleFileDrop extends React.Component {
         const reader = new FileReader();
         reader.onload = theFile => {
           const { result } = theFile.currentTarget;
-          const json = parser.parse(result);
+          const json = parser.parse(result, {
+            ignoreAttributes: false,
+            parseAttributeValue: true,
+          });
+          // Parse main info
+          const info = {
+            currentSeason: json.SaveGame.currentSeason,
+            dayOfMonth: json.SaveGame.dayOfMonth,
+            dailyLuck: json.SaveGame.dailyLuck,
+            year: json.SaveGame.year,
+          };
+          this.props.store.set('info')(info);
           // Parse locations
           const locations = json.SaveGame.locations.GameLocation.filter(
             ({ name }) => isValidLocation(name) && MAPS[name]
           ).reduce((p, location) => {
             const name = location.name;
-            p[name] = (location.objects || { item: [] }).item
+            location.objects = location.objects || { item: [] };
+            location.objects = Array.isArray(location.objects.item)
+              ? location.objects
+              : { item: [location.objects.item] };
+            p[name] = location.objects.item
               .map(item => {
                 const itemId = item.value.Object.parentSheetIndex;
                 if (!isForageItem(itemId)) {
@@ -39,6 +54,7 @@ class HandleFileDrop extends React.Component {
             return p;
           }, {});
           this.props.store.set('locations')(locations);
+          this.props.store.set('gameState')(json.SaveGame);
         };
         reader.readAsText(file);
       }

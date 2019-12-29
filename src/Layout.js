@@ -1,13 +1,16 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import Store from './Store';
 
-const { Content, Footer, Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 export default function LayoutView(props) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const history = useHistory();
   const location = useLocation();
+  const store = Store.useStore();
+  const info = store.get('info');
   return (
     <Layout>
       <Sider
@@ -55,6 +58,12 @@ export default function LayoutView(props) {
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
+        <Header style={{ background: '#fff', padding: 0, paddingLeft: '15px' }}>
+          <h2>
+            Tegridy Farms - {info.currentSeason} {info.dayOfMonth} - Year{' '}
+            {info.year}
+          </h2>
+        </Header>
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div style={{ padding: 24, background: '#fff' }}>
             {props.children}
