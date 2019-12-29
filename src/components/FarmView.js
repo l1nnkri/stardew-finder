@@ -24,8 +24,8 @@ export default function FarmView(props) {
 
   const tileSize = 100 / MAP_SIZES['Farm'].x;
 
-  let tappers = location.objects.item
-    .filter(feature => feature.value.Object.name === 'Tapper')
+  let filterObjectsByName = name => location.objects.item
+    .filter(feature => feature.value.Object.name === name)
     .map(feature => {
       const { name, heldObject, minutesUntilReady } = feature.value.Object;
       const type = heldObject.name;
@@ -36,6 +36,9 @@ export default function FarmView(props) {
         daysToHarvest,
       };
     });
+
+  let tappers = filterObjectsByName('Tapper');
+  let preservesJars = filterObjectsByName('Preserves Jar');
 
   let crops = location.terrainFeatures.item
     .filter(feature => feature.value.TerrainFeature.crop)
@@ -81,7 +84,7 @@ export default function FarmView(props) {
       };
     });
 
-  const allObjects = [...crops, ...tappers];
+  const allObjects = [...crops, ...tappers, ...preservesJars];
 
   const cropsCountMap = allObjects.reduce((p, c) => {
     const existing = p[c.name] || 0;
