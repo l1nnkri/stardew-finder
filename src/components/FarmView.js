@@ -165,7 +165,7 @@ export default function FarmView(props) {
                     color: c.dead ? '#000' : c.done ? '#52c41a' : 'red',
                   }}
                 >
-                  {c.daysToHarvest}
+                  {c.dead ? 'X' : c.daysToHarvest}
                 </div>
               </Popover>
             </Tooltip>
