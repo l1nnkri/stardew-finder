@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10
-    - run: yarn
-    - run: yarn build
-    - run: npx surge build --token ${{ secrets.SURGE_TOKEN }}
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: yarn
+      - run: yarn build
+      - run: npx surge build stardew-help.surge.sh --token ${{ secrets.SURGE_TOKEN }}
