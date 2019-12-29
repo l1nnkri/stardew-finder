@@ -5,6 +5,50 @@ import { REVERSE_ID_TABLE, MAP_SIZES } from '../utils';
 import { Tooltip, Checkbox, Popover, Divider } from 'antd';
 import ReactJsonView from 'react-json-view';
 
+const filterObjectsByName = (location, name) =>
+  location.objects.item
+    .filter(feature => feature.value.Object.name === name)
+    .map(feature => {
+      const { name, heldObject, minutesUntilReady } = feature.value.Object;
+      const type = heldObject.name;
+      const daysToHarvest = Math.round(minutesUntilReady / 60 / 24);
+      return {
+        ...feature,
+        name: `${name} (${type})`,
+        daysToHarvest,
+        x: feature.key.Vector2.X,
+        y: feature.key.Vector2.Y,
+        done: minutesUntilReady === 0,
+      };
+    });
+
+const findInBuildings = (location, building, names = []) => {
+  const buildings = location.buildings.Building.filter(
+    b => b.buildingType === building
+  );
+  const allObjects = buildings.reduce((p, building) => {
+    const objects = building.indoors.objects.item
+      .filter(
+        item => names.length === 0 || names.includes(item.value.Object.name)
+      )
+      .map(item => {
+        const { name, minutesUntilReady } = item.value.Object;
+        const daysToHarvest = Math.round(minutesUntilReady / 60 / 24);
+        return {
+          ...item,
+          name,
+          daysToHarvest,
+          x: item.key.Vector2.X,
+          y: item.key.Vector2.Y,
+          done: minutesUntilReady === 0,
+        };
+      });
+    return [...p, ...objects];
+  }, []);
+
+  return allObjects;
+};
+
 export default function FarmView(props) {
   const store = Store.useStore();
   const gameState = store.get('gameState');
@@ -24,23 +68,10 @@ export default function FarmView(props) {
 
   const tileSize = 100 / MAP_SIZES['Farm'].x;
 
-  let filterObjectsByName = name =>
-    location.objects.item
-      .filter(feature => feature.value.Object.name === name)
-      .map(feature => {
-        const { name, heldObject, minutesUntilReady } = feature.value.Object;
-        const type = heldObject.name;
-        const daysToHarvest = Math.round(minutesUntilReady / 60 / 24);
-        return {
-          ...feature,
-          name: `${name} (${type})`,
-          daysToHarvest,
-        };
-      });
-
-  let tappers = filterObjectsByName('Tapper');
-  let preservesJars = filterObjectsByName('Preserves Jar');
-  let beeHouses = filterObjectsByName('Bee House');
+  let tappers = filterObjectsByName(location, 'Tapper');
+  let preservesJars = filterObjectsByName(location, 'Preserves Jar');
+  let beeHouses = filterObjectsByName(location, 'Bee House');
+  let eggs = findInBuildings(location, 'Coop', ['Egg']);
 
   let crops = location.terrainFeatures.item
     .filter(feature => feature.value.TerrainFeature.crop)
@@ -83,10 +114,18 @@ export default function FarmView(props) {
         daysToHarvest,
         done,
         dead: feature.value.TerrainFeature.crop.dead,
+        x: feature.key.Vector2.X,
+        y: feature.key.Vector2.Y,
       };
     });
 
-  const allObjects = [...crops, ...tappers, ...preservesJars, ...beeHouses];
+  const allObjects = [
+    ...crops,
+    ...tappers,
+    ...preservesJars,
+    ...beeHouses,
+    ...eggs,
+  ];
 
   const cropsCountMap = allObjects.reduce((p, c) => {
     const existing = p[c.name] || 0;
@@ -160,8 +199,8 @@ export default function FarmView(props) {
                     fontSize: '0.45rem',
                     height: `${(tileSize * mapSize.x) / mapSize.y}%`,
                     border: '1px solid black',
-                    left: `${(c.key.Vector2.X / mapSize.x) * 100}%`,
-                    top: `${(c.key.Vector2.Y / mapSize.y) * 100}%`,
+                    left: `${(c.x / mapSize.x) * 100}%`,
+                    top: `${(c.y / mapSize.y) * 100}%`,
                     position: 'absolute',
                     width: `${tileSize}%`,
                     color: c.dead ? '#000' : c.done ? '#52c41a' : 'red',
