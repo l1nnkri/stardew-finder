@@ -9,7 +9,11 @@ const filterObjectsByName = (location, name) =>
   location.objects.item
     .filter(feature => feature.value.Object.name === name)
     .map(feature => {
-      const { name, heldObject = {}, minutesUntilReady } = feature.value.Object;
+      const {
+        name,
+        heldObject = { name: 'empty' },
+        minutesUntilReady,
+      } = feature.value.Object;
       const type = heldObject.name;
       const daysToHarvest = Math.round(minutesUntilReady / 60 / 24);
       return {
