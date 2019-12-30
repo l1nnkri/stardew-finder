@@ -3,6 +3,7 @@ import { Tag, Table } from 'antd';
 import { getBundleStatus, ROOMS, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
+import { uniqBy } from 'lodash';
 
 export default function BundleView(props) {
   const store = Store.useStore();
@@ -40,7 +41,11 @@ export default function BundleView(props) {
       sorter: (a, b) => a.roomName.localeCompare(b.roomName),
     },
     { title: 'Bundle', dataIndex: 'bundleName' },
-    { title: 'Reward', dataIndex: 'reward.name' },
+    {
+      title: 'Reward',
+      dataIndex: 'reward',
+      render: reward => `${reward.name} (${reward.stack})`,
+    },
     {
       title: 'nMissing',
       dataIndex: 'nMissing',
@@ -48,15 +53,28 @@ export default function BundleView(props) {
     },
     {
       title: 'Missing',
-      render: bundle => (
+      dataIndex: 'missingIngredients',
+      render: (missing, bundle) => (
         <div>
-          {bundle.missingIngredients.map(ing => (
-            <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
-              {ing.name || ing.itemId}
-            </Tag>
-          ))}
+          {bundle.missingIngredients
+            .filter(i => i.name)
+            .map(ing => (
+              <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
+                {ing.name}
+              </Tag>
+            ))}
         </div>
       ),
+      filters: uniqBy(
+        missingBundleItems
+          .reduce((p, c) => [...p, ...c.missingIngredients], [])
+          .map(ing => ({ text: ing.name, value: ing.itemId })),
+        'value'
+      )
+        .filter(i => !!i.text)
+        .sort((a, b) => a.text.localeCompare(b.text)),
+      onFilter: (value, record) =>
+        record.missingIngredients.find(i => i.itemId === value),
     },
   ];
 
