@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/martolini/stardew-finder/compare/v1.6.0...v1.6.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* Change menu icon order ([21a42be](https://github.com/martolini/stardew-finder/commit/21a42bee52669b80b9f3d468cf530dcd2717ceb9))
+
 # [1.6.0](https://github.com/martolini/stardew-finder/compare/v1.5.6...v1.6.0) (2019-12-30)
 
 
