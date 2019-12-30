@@ -4,6 +4,7 @@ import { getBundleStatus, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 import { uniqBy } from 'lodash';
+import { wikify } from '../utils';
 import styled from 'styled-components';
 
 const WrapperDiv = styled.div`
@@ -62,7 +63,11 @@ export default function BundleView(props) {
     {
       title: 'Reward',
       dataIndex: 'reward',
-      render: reward => `${reward.name} (${reward.stack})`,
+      render: reward => (
+        <div>
+          {wikify({ name: reward.name })} ({reward.stack})
+        </div>
+      ),
     },
     {
       title: 'nMissing',
@@ -78,7 +83,8 @@ export default function BundleView(props) {
             .filter(i => i.name)
             .map(ing => (
               <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
-                {ing.name} ({ing.stack}) {qualityIcons[ing.quality]}
+                {wikify({ name: ing.name })} ({ing.stack}){' '}
+                {qualityIcons[ing.quality]}
               </Tag>
             ))}
         </div>
