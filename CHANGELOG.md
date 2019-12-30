@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/martolini/stardew-finder/compare/v1.6.1...v1.7.0) (2019-12-30)
+
+
+### Features
+
+* Add luck to header ([d134748](https://github.com/martolini/stardew-finder/commit/d134748825fc04b15bee70cb6178fffaeba4d918))
+
 ## [1.6.1](https://github.com/martolini/stardew-finder/compare/v1.6.0...v1.6.1) (2019-12-30)
 
 
