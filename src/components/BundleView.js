@@ -1,10 +1,12 @@
 import React from 'react';
-import { getBundleStatus, ROOMS } from '../bundleUtils';
+import { Tag } from 'antd';
+import { getBundleStatus, ROOMS, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 
 export default function BundleView(props) {
   const store = Store.useStore();
+  const deliverableItems = store.get('deliverableItems');
   const gameState = store.get('gameState');
   if (Object.keys(gameState).length === 0) {
     return null;
@@ -21,12 +23,28 @@ export default function BundleView(props) {
         {roomName}
         <ol>
           {bundles.map(b => (
-            <li key={b.id}>
+            <li key={b.id} style={{ marginBottom: 5 }}>
               {b.bundleName} - missing {bundleStatus[b.id].nMissing} -{' '}
               {bundleStatus[b.id].missingIngredients
-                .map(i => i.name)
-                .filter(i => !!i)
-                .join(', ')}
+                .map(i => ({
+                  ...i,
+                  deliverable: canDeliverItem(
+                    deliverableItems,
+                    i.itemId,
+                    i.stack,
+                    i.quality
+                  ),
+                }))
+                .filter(i => i.name)
+                .map(item => (
+                  <Tag
+                    key={item.itemId}
+                    color={item.deliverable ? 'green' : 'red'}
+                  >
+                    {item.name}[{item.quality}]
+                  </Tag>
+                ))}{' '}
+              - {b.reward.name || b.reward.id}
             </li>
           ))}
         </ol>

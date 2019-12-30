@@ -7,6 +7,7 @@ import qs from 'query-string';
 import { storage } from '../firebase';
 import axios from 'axios';
 import hash from 'hash-sum';
+import { getDeliverableItems } from '../bundleUtils';
 
 class HandleFileDrop extends React.Component {
   state = {
@@ -61,6 +62,9 @@ class HandleFileDrop extends React.Component {
     }, {});
     this.props.store.set('locations')(locations);
     this.props.store.set('gameState')(json.SaveGame);
+    this.props.store.set('deliverableItems')(
+      getDeliverableItems(json.SaveGame)
+    );
     window.gameState = json.SaveGame;
     this.setState({ isDraggingFile: false });
   }

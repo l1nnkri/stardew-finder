@@ -128,3 +128,114 @@ export const getBundleStatus = gameState => {
   }, {});
   return missing;
 };
+
+const findPaths = (
+  obj,
+  searchValue,
+  { searchKeys = typeof searchValue === 'string', maxDepth = 20 } = {}
+) => {
+  const paths = [];
+  const notObject = typeof searchValue !== 'object';
+  const gvpio = (obj, maxDepth, prefix) => {
+    if (!maxDepth) return;
+
+    for (const [curr, currElem] of Object.entries(obj)) {
+      if (searchKeys && curr === searchValue) {
+        // To search for property name too ...
+        paths.push(prefix + curr);
+      }
+
+      if (typeof currElem === 'object') {
+        // object is "object" and "array" is also in the eyes of "typeof"
+        // search again :D
+        gvpio(currElem, maxDepth - 1, prefix + curr + '/');
+        if (notObject) continue;
+      }
+      // it's something else... probably the value we are looking for
+      // compares with "searchValue"
+      if (currElem === searchValue) {
+        // return index AND/OR property name
+        paths.push(prefix + curr);
+      }
+    }
+  };
+  gvpio(obj, maxDepth, '');
+  return paths;
+};
+
+export const getDeliverableItems = gameState => {
+  // Find player inventory
+  const playerItems = gameState.player.items.Item.filter(
+    item => item['@_xsi:nil'] !== true
+  ).map(item => ({
+    name: item.name,
+    stack: item.stack,
+    id: item.parentSheetIndex,
+    quality: item.quality,
+  }));
+
+  // Find farmhands inventory
+  const farmhands = findPaths(gameState, 'farmhand').map(path =>
+    path.split('/').reduce((p, c) => p[c], gameState)
+  );
+
+  const farmhandItems = farmhands
+    .map(farmhand => {
+      const items = farmhand.items.Item;
+      return items
+        .filter(item => item['@_xsi:nil'] !== true)
+        .map(item => ({
+          name: item.name,
+          stack: item.stack,
+          id: item.parentSheetIndex,
+          quality: item.quality,
+        }));
+    })
+    .reduce((p, c) => [...p, ...c], []);
+
+  // Find all chests
+  const chestItems = findPaths(gameState, 'playerChest')
+    .map(path =>
+      path
+        .split('/')
+        .slice(0, -1)
+        .reduce((p, c) => p[c], gameState)
+    )
+    .map(chest => (chest.items === '' ? [] : chest.items.Item))
+    .filter(chest => chest.length > 0)
+    .map(chest =>
+      chest.map(item => ({
+        name: item.name,
+        stack: item.stack,
+        id: item.parentSheetIndex,
+        quality: item.quality,
+      }))
+    )
+    .reduce((p, c) => [...p, ...c], []);
+
+  return [...playerItems, ...farmhandItems, ...chestItems].reduce((p, c) => {
+    const key = c.id;
+    const current = p[key];
+    if (!current || current.length === 0) {
+      p[key] = [c];
+    } else {
+      p[key] = [...p[key], c];
+    }
+    return p;
+  }, {});
+};
+
+export const canDeliverItem = (deliverableItems, itemId, stack, quality) => {
+  const items = deliverableItems[itemId] || [];
+  if (
+    items.reduce((p, c) => {
+      if (c.quality > quality) {
+        return p + c.stack;
+      }
+      return p;
+    }, 0) >= stack
+  ) {
+    return true;
+  }
+  return false;
+};

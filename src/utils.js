@@ -398,6 +398,7 @@ export const ID_TABLE = {
   Weeds: 0,
   Stone: 2,
   Stone: 4,
+  'Bee House': 10,
   'Wild Horseradish': 16,
   Daffodil: 18,
   Leek: 20,

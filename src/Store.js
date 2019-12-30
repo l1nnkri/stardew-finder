@@ -1,11 +1,14 @@
 import { createConnectedStore, withReduxDevtools } from 'undux';
 
 // Create a store with an initial value.
-export default createConnectedStore(
+const store = createConnectedStore(
   {
     locations: {},
     gameState: {},
     info: {},
+    deliverableItems: {},
   },
   withReduxDevtools
 );
+
+export default store;
