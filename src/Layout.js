@@ -59,8 +59,11 @@ export default function LayoutView(props) {
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
         <Header style={{ background: '#fff', padding: 0, paddingLeft: '15px' }}>
           <h2>
-            Tegridy Farms - {info.currentSeason} {info.dayOfMonth} - Year{' '}
-            {info.year}
+            <span>
+              Tegridy Farms - {info.currentSeason} {info.dayOfMonth} - Year{' '}
+              {info.year} - {Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}%
+              luck
+            </span>
           </h2>
         </Header>
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
