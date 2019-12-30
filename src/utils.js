@@ -1,5 +1,3 @@
-import React from 'react';
-import { Icon } from 'antd';
 import Backwoods from './img/Backwoods.png';
 import Beach from './img/Beach.png';
 import BusStop from './img/Bus_stop.png';
@@ -9,21 +7,6 @@ import Farm from './img/Farm.png';
 import Mountain from './img/Mountain.png';
 import PelicanTown from './img/Pelican_Town.png';
 import Woods from './img/Woods.png';
-
-export const wikify = ({ id, name }) => {
-  const slug = name || REVERSE_ID_TABLE[id];
-  if (!slug) {
-    return name;
-  }
-  return (
-    <a
-      target="blank"
-      href={`https://stardewvalleywiki.com/${slug.replace(' ', '_')}`}
-    >
-      {slug}
-    </a>
-  );
-};
 
 export const MAP_SIZES = {
   AnimalShop: { x: 35, y: 20 },

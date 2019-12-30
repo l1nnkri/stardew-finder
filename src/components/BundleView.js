@@ -4,7 +4,7 @@ import { getBundleStatus, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 import { uniqBy } from 'lodash';
-import { wikify } from '../utils';
+import Wikify from './Wikify';
 import styled from 'styled-components';
 import QualityIcon from './QualityIcon';
 
@@ -59,7 +59,9 @@ export default function BundleView(props) {
       dataIndex: 'reward',
       render: reward => (
         <div>
-          {wikify({ name: reward.name })} ({reward.stack})
+          <Wikify name={reward.name}>
+            {reward.name} ({reward.stack})
+          </Wikify>
         </div>
       ),
     },
@@ -77,7 +79,9 @@ export default function BundleView(props) {
             .filter(i => i.name)
             .map(ing => (
               <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
-                {wikify({ name: ing.name })} ({ing.stack}){' '}
+                <Wikify name={ing.name}>
+                  {ing.name} ({ing.stack})
+                </Wikify>
                 <QualityIcon quality={ing.quality} />
               </Tag>
             ))}
