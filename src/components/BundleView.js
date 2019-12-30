@@ -54,7 +54,7 @@ export default function BundleView(props) {
     {
       title: 'Missing',
       dataIndex: 'missingIngredients',
-      render: (missing, bundle) => (
+      render: (_, bundle) => (
         <div>
           {bundle.missingIngredients
             .filter(i => i.name)

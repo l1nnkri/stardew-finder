@@ -23,6 +23,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
+      - run: CI=true yarn test
       - run: NODE_ENV=production yarn build
       - run: npx surge build --domain=https://stardew-help.surge.sh --token=${{ secrets.SURGE_TOKEN }}
       - name: semantic-release
