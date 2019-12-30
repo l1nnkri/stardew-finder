@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/martolini/stardew-finder/compare/v1.5.4...v1.5.5) (2019-12-30)
+
+
+### Bug Fixes
+
+* Don't rely on state for crop being done ([5b60c5a](https://github.com/martolini/stardew-finder/commit/5b60c5a5a9e242a02d54f8dc53e67f56658f142f))
+
 ## [1.5.4](https://github.com/martolini/stardew-finder/compare/v1.5.3...v1.5.4) (2019-12-30)
 
 
