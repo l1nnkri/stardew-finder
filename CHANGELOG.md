@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/martolini/stardew-finder/compare/v1.5.6...v1.6.0) (2019-12-30)
+
+
+### Features
+
+* Add inventory ([706e362](https://github.com/martolini/stardew-finder/commit/706e362ad0a48629470be7ae49e256c5067983c6))
+
 ## [1.5.6](https://github.com/martolini/stardew-finder/compare/v1.5.5...v1.5.6) (2019-12-30)
 
 
