@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/martolini/stardew-finder/compare/v1.3.0...v1.3.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* force https ([e099f39](https://github.com/martolini/stardew-finder/commit/e099f3946b9bf731abebb247566cf2a4a9ed9fef))
+
 # [1.3.0](https://github.com/martolini/stardew-finder/compare/v1.2.0...v1.3.0) (2019-12-30)
 
 
