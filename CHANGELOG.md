@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/martolini/stardew-finder/compare/v1.7.0...v1.8.0) (2019-12-30)
+
+
+### Features
+
+* Add price to inventory ([e5a44f2](https://github.com/martolini/stardew-finder/commit/e5a44f24011ce251e1ea4c6da581b4e56f726a26))
+
 # [1.7.0](https://github.com/martolini/stardew-finder/compare/v1.6.1...v1.7.0) (2019-12-30)
 
 
