@@ -1,11 +1,12 @@
 import React from 'react';
-import { Tag, Table, Icon } from 'antd';
+import { Tag, Table } from 'antd';
 import { getBundleStatus, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 import { uniqBy } from 'lodash';
 import { wikify } from '../utils';
 import styled from 'styled-components';
+import QualityIcon from './QualityIcon';
 
 const WrapperDiv = styled.div`
   .green-row {
@@ -16,13 +17,6 @@ const WrapperDiv = styled.div`
     padding: 12px 12px;
   }
 `;
-
-const qualityIcons = {
-  0: null,
-  1: <Icon type="star" theme="filled" style={{ color: 'silver' }} />,
-  2: <Icon type="star" theme="filled" style={{ color: 'gold' }} />,
-  3: <Icon type="star" theme="filled" style={{ color: 'magenta' }} />,
-};
 
 export default function BundleView(props) {
   const store = Store.useStore();
@@ -84,7 +78,7 @@ export default function BundleView(props) {
             .map(ing => (
               <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
                 {wikify({ name: ing.name })} ({ing.stack}){' '}
-                {qualityIcons[ing.quality]}
+                <QualityIcon quality={ing.quality} />
               </Tag>
             ))}
         </div>

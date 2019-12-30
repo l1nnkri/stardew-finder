@@ -48,6 +48,12 @@ export default function LayoutView(props) {
               <span className="nav-text">Bundles</span>
             </KeepQueryLink>
           </Menu.Item>
+          <Menu.Item key="inventory">
+            <KeepQueryLink to="/inventory">
+              <Icon type="database" />
+              <span className="nav-text">Inventory</span>
+            </KeepQueryLink>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>

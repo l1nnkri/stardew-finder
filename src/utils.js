@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'antd';
 import Backwoods from './img/Backwoods.png';
 import Beach from './img/Beach.png';
 import BusStop from './img/Bus_stop.png';
