@@ -229,7 +229,7 @@ export const canDeliverItem = (deliverableItems, itemId, stack, quality) => {
   const items = deliverableItems[itemId] || [];
   if (
     items.reduce((p, c) => {
-      if (c.quality > quality) {
+      if (c.quality >= quality) {
         return p + c.stack;
       }
       return p;
