@@ -103,8 +103,8 @@ class ForageView extends React.Component {
             </Select>
           </div>
           {maps.map(m => (
-            <div style={{ marginTop: 10, display: 'inline-block' }}>
-              <a key={m} style={{ marginRight: 10 }} href={`#${m}`}>
+            <div style={{ marginTop: 10, display: 'inline-block' }} key={m}>
+              <a style={{ marginRight: 10 }} href={`#${m}`}>
                 {m}
               </a>
             </div>
