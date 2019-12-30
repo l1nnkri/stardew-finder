@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/martolini/stardew-finder/compare/v1.5.5...v1.5.6) (2019-12-30)
+
+
+### Bug Fixes
+
+* Add key to elements in forageview ([ade741c](https://github.com/martolini/stardew-finder/commit/ade741caf06ff4c56156fd3cbf1d5815c7adb9d7))
+
 ## [1.5.5](https://github.com/martolini/stardew-finder/compare/v1.5.4...v1.5.5) (2019-12-30)
 
 
