@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/martolini/stardew-finder/compare/v1.5.0...v1.5.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* New title ([6550925](https://github.com/martolini/stardew-finder/commit/655092510c478df6a3c99359d703cd25df6f8c33))
+
 # [1.5.0](https://github.com/martolini/stardew-finder/compare/v1.4.0...v1.5.0) (2019-12-30)
 
 
