@@ -95,9 +95,9 @@ export default function FarmView(props) {
         // Check if done
         if (regrowAfterHarvest > 0) {
           if (
-            feature.value.TerrainFeature.state === 1 ||
             dayOfCurrentPhase === -1 ||
-            dayOfCurrentPhase === 0
+            dayOfCurrentPhase === 0 ||
+            dayOfCurrentPhase === regrowAfterHarvest
           ) {
             daysToHarvest = 0;
             done = true;
