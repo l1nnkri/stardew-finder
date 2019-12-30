@@ -1,10 +1,10 @@
 import React from 'react';
-import { Tooltip, Select } from 'antd';
+import { Tooltip, Select, Divider } from 'antd';
 import 'antd/dist/antd.css';
 import { MAP_IMAGES, MAP_SIZES } from '../utils';
 import Store from '../Store';
 
-class MapViewer extends React.Component {
+class ForageView extends React.Component {
   state = {
     locations: {},
     maps: Object.keys(MAP_IMAGES),
@@ -40,9 +40,8 @@ class MapViewer extends React.Component {
           <div>
             <h3>
               <a name={key} href={`#${key}`}>
-                {key}
+                {key} ({markers.length})
               </a>
-              . Count: {markers.length}
             </h3>
           </div>
           <div
@@ -86,26 +85,31 @@ class MapViewer extends React.Component {
               0
             )}
           </h1>
-          <Select
-            allowClear
-            mode="multiple"
-            style={{ width: '80%' }}
-            onChange={this.onChange}
-            value={maps}
-          >
-            {Object.keys(MAP_IMAGES).map(key => {
-              return (
-                <Select.Option key={key} value={key}>
-                  {key} [{(locations[key] || []).length}]
-                </Select.Option>
-              );
-            })}
-          </Select>
+          <div>
+            <Select
+              allowClear
+              mode="multiple"
+              style={{ width: '80%' }}
+              onChange={this.onChange}
+              value={maps}
+            >
+              {Object.keys(MAP_IMAGES).map(key => {
+                return (
+                  <Select.Option key={key} value={key}>
+                    {key} [{(locations[key] || []).length}]
+                  </Select.Option>
+                );
+              })}
+            </Select>
+          </div>
           {maps.map(m => (
-            <a key={m} style={{ margin: 10 }} href={`#${m}`}>
-              {m}
-            </a>
+            <div style={{ marginTop: 10, display: 'inline-block' }}>
+              <a key={m} style={{ marginRight: 10 }} href={`#${m}`}>
+                {m}
+              </a>
+            </div>
           ))}
+          <Divider />
           {this.createMapElements(maps, locations)}
         </div>
       </div>
@@ -113,4 +117,4 @@ class MapViewer extends React.Component {
   }
 }
 
-export default Store.withStore(MapViewer);
+export default Store.withStore(ForageView);
