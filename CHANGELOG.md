@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/martolini/stardew-finder/compare/v1.5.1...v1.5.2) (2019-12-30)
+
+
+### Bug Fixes
+
+* Add quality icons on bundles ([293098e](https://github.com/martolini/stardew-finder/commit/293098e3d405f3ff1e7ecfe9bacae17eeff896e7))
+
 ## [1.5.1](https://github.com/martolini/stardew-finder/compare/v1.5.0...v1.5.1) (2019-12-30)
 
 
