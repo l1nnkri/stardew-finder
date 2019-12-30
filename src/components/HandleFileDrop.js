@@ -61,6 +61,7 @@ class HandleFileDrop extends React.Component {
     }, {});
     this.props.store.set('locations')(locations);
     this.props.store.set('gameState')(json.SaveGame);
+    window.gameState = json.SaveGame;
     this.setState({ isDraggingFile: false });
   }
 

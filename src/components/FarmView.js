@@ -144,7 +144,12 @@ export default function FarmView(props) {
 
   return (
     <div>
-      <div style={{ width: '15%', display: 'inline-block' }}>
+      <div
+        style={{
+          width: '15%',
+          display: 'inline-block',
+        }}
+      >
         <Checkbox
           onChange={e => {
             setIndeterminate(false);

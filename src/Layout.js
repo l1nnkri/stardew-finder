@@ -1,8 +1,9 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Store from './Store';
 import KeepQueryLink from './components/KeepQueryLink';
+import { storage } from './firebase';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -42,6 +43,12 @@ export default function LayoutView(props) {
               <span className="nav-text">Farm</span>
             </KeepQueryLink>
           </Menu.Item>
+          <Menu.Item key="bundles">
+            <KeepQueryLink to="/bundles">
+              <Icon type="appstore" />
+              <span className="nav-text">Bundles</span>
+            </KeepQueryLink>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>
@@ -57,7 +64,12 @@ export default function LayoutView(props) {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          {'martolini <3 stardew'}
+          <p>
+            {'martolini <3 stardew'} -{' '}
+            <a href="" target="blank">
+              Download gamestate here
+            </a>
+          </p>
         </Footer>
       </Layout>
     </Layout>

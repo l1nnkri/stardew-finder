@@ -4,6 +4,7 @@ import MapViewer from './components/MapViewer';
 import Layout from './Layout';
 import HandleFileDrop from './components/HandleFileDrop';
 import FarmView from './components/FarmView';
+import BundleView from './components/BundleView';
 import Store from './Store';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" component={Main} exact />
               <Route path={`/foraging`} component={MapViewer} exact />
               <Route path={`/farm`} component={FarmView} exact />
+              <Route path={`/bundles`} component={BundleView} exact />
             </Switch>
           </Layout>
         </HandleFileDrop>
