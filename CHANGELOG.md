@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/martolini/stardew-finder/compare/v1.3.1...v1.4.0) (2019-12-30)
+
+
+### Features
+
+* Show bundles in table ([30dfd88](https://github.com/martolini/stardew-finder/commit/30dfd88e127d8cc7cddc5a72d8843ea89a6534ca))
+
 ## [1.3.1](https://github.com/martolini/stardew-finder/compare/v1.3.0...v1.3.1) (2019-12-30)
 
 
