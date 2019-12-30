@@ -1,9 +1,16 @@
 import React from 'react';
-import { Tag, Table } from 'antd';
-import { getBundleStatus, ROOMS, canDeliverItem } from '../bundleUtils';
+import { Tag, Table, Icon } from 'antd';
+import { getBundleStatus, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 import { uniqBy } from 'lodash';
+
+const qualityIcons = {
+  0: null,
+  1: <Icon type="star" theme="filled" style={{ color: 'silver' }} />,
+  2: <Icon type="star" theme="filled" style={{ color: 'gold' }} />,
+  3: <Icon type="star" theme="filled" style={{ color: 'magenta' }} />,
+};
 
 export default function BundleView(props) {
   const store = Store.useStore();
@@ -60,7 +67,7 @@ export default function BundleView(props) {
             .filter(i => i.name)
             .map(ing => (
               <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
-                {ing.name}
+                {ing.name} ({ing.stack}) {qualityIcons[ing.quality]}
               </Tag>
             ))}
         </div>
