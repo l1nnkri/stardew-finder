@@ -1,3 +1,11 @@
+## [1.5.4](https://github.com/martolini/stardew-finder/compare/v1.5.3...v1.5.4) (2019-12-30)
+
+
+### Bug Fixes
+
+* Add green rows for done bundles ([d624fe4](https://github.com/martolini/stardew-finder/commit/d624fe432cc0c3b047200f20c7ef6d0b204b4612))
+* Add wikified links ([23de7d9](https://github.com/martolini/stardew-finder/commit/23de7d9f76bd5658a09a849b435a193359175bb1))
+
 ## [1.5.3](https://github.com/martolini/stardew-finder/compare/v1.5.2...v1.5.3) (2019-12-30)
 
 
