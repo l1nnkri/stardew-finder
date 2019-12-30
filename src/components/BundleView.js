@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag } from 'antd';
+import { Tag, Table } from 'antd';
 import { getBundleStatus, ROOMS, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
@@ -11,45 +11,61 @@ export default function BundleView(props) {
   if (Object.keys(gameState).length === 0) {
     return null;
   }
+  if (!deliverableItems) return null;
   const bundleStatus = getBundleStatus(gameState);
-  const rooms = Object.keys(ROOMS).map(roomKey => {
-    const roomName = ROOMS[roomKey].name;
-    const bundles = Object.keys(ROOMS[roomKey].bundles)
-      .sort()
-      .filter(key => bundleStatus[key].nMissing > 0)
-      .map(key => Bundles[key]);
-    return (
-      <li key={roomKey}>
-        {roomName}
-        <ol>
-          {bundles.map(b => (
-            <li key={b.id} style={{ marginBottom: 5 }}>
-              {b.bundleName} - missing {bundleStatus[b.id].nMissing} -{' '}
-              {bundleStatus[b.id].missingIngredients
-                .map(i => ({
-                  ...i,
-                  deliverable: canDeliverItem(
-                    deliverableItems,
-                    i.itemId,
-                    i.stack,
-                    i.quality
-                  ),
-                }))
-                .filter(i => i.name)
-                .map(item => (
-                  <Tag
-                    key={item.itemId}
-                    color={item.deliverable ? 'green' : 'red'}
-                  >
-                    {item.name}[{item.quality}]
-                  </Tag>
-                ))}{' '}
-              - {b.reward.name || b.reward.id}
-            </li>
+  const missingBundleItems = Object.keys(Bundles)
+    .map(bundleKey => {
+      const dataBundle = Bundles[bundleKey];
+      return {
+        ...dataBundle,
+        ...bundleStatus[dataBundle.id],
+        missingIngredients: bundleStatus[dataBundle.id].missingIngredients.map(
+          i => ({
+            ...i,
+            deliverable: canDeliverItem(
+              deliverableItems,
+              i.itemId,
+              i.stack,
+              i.quality
+            ),
+          })
+        ),
+      };
+    })
+    .filter(({ nMissing }) => nMissing > 0);
+  const columns = [
+    {
+      title: 'Room',
+      dataIndex: 'roomName',
+      sorter: (a, b) => a.roomName.localeCompare(b.roomName),
+    },
+    { title: 'Bundle', dataIndex: 'bundleName' },
+    { title: 'Reward', dataIndex: 'reward.name' },
+    {
+      title: 'nMissing',
+      dataIndex: 'nMissing',
+      sorter: (a, b) => a.nMissing - b.nMissing,
+    },
+    {
+      title: 'Missing',
+      render: bundle => (
+        <div>
+          {bundle.missingIngredients.map(ing => (
+            <Tag key={ing.itemId} color={ing.deliverable ? 'green' : 'red'}>
+              {ing.name || ing.itemId}
+            </Tag>
           ))}
-        </ol>
-      </li>
-    );
-  });
-  return <ol>{rooms}</ol>;
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <Table
+      dataSource={missingBundleItems}
+      rowKey="id"
+      columns={columns}
+      pagination={false}
+    />
+  );
 }
