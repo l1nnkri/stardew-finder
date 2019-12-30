@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/martolini/stardew-finder/compare/v1.4.0...v1.5.0) (2019-12-30)
+
+
+### Bug Fixes
+
+* Add filtering to missing ingredients ([af7f75b](https://github.com/martolini/stardew-finder/commit/af7f75be43a1d0552ed940512ea12ad7efcc46d0))
+
+
+### Features
+
+* Deal with crafting recipes ([d324266](https://github.com/martolini/stardew-finder/commit/d3242666f4718de50f4d65ed1db4fe302808beca))
+
 # [1.4.0](https://github.com/martolini/stardew-finder/compare/v1.3.1...v1.4.0) (2019-12-30)
 
 
