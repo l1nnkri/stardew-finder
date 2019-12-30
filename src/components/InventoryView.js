@@ -56,6 +56,11 @@ export default function InventoryView(props) {
       dataIndex: 'stack',
       sorter: (a, b) => a.stack - b.stack,
     },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      sorter: (a, b) => a.price - b.price,
+    },
   ];
 
   const searchRegexp = new RegExp(searchTerm, 'i');

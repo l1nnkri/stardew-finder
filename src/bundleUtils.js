@@ -172,6 +172,7 @@ export const getDeliverableItems = gameState => {
     stack: item.stack,
     id: item.parentSheetIndex,
     quality: item.quality,
+    price: item.price,
   }));
 
   // Find farmhands inventory
@@ -189,6 +190,7 @@ export const getDeliverableItems = gameState => {
           stack: item.stack,
           id: item.parentSheetIndex,
           quality: item.quality,
+          price: item.price,
         }));
     })
     .reduce((p, c) => [...p, ...c], []);
@@ -209,6 +211,7 @@ export const getDeliverableItems = gameState => {
         stack: item.stack,
         id: item.parentSheetIndex,
         quality: item.quality,
+        price: item.price,
       }))
     )
     .reduce((p, c) => [...p, ...c], []);
