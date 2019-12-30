@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/martolini/stardew-finder/compare/v1.5.2...v1.5.3) (2019-12-30)
+
+
+### Bug Fixes
+
+* Require same or higher quality in bundles ([39a0528](https://github.com/martolini/stardew-finder/commit/39a0528a202abe92b201d36be9f4abeef1f0f4fb))
+
 ## [1.5.2](https://github.com/martolini/stardew-finder/compare/v1.5.1...v1.5.2) (2019-12-30)
 
 
