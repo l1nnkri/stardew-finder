@@ -30,16 +30,16 @@ export default function LayoutView(props) {
           mode="inline"
           defaultSelectedKeys={[location.pathname.slice(1)]}
         >
-          <Menu.Item key="foraging">
-            <KeepQueryLink to="/foraging">
-              <Icon type="environment" />
-              <span className="nav-text">Foraging</span>
-            </KeepQueryLink>
-          </Menu.Item>
           <Menu.Item key="farm">
             <KeepQueryLink to="/farm">
               <Icon type="home" />
               <span className="nav-text">Farm</span>
+            </KeepQueryLink>
+          </Menu.Item>
+          <Menu.Item key="inventory">
+            <KeepQueryLink to="/inventory">
+              <Icon type="database" />
+              <span className="nav-text">Inventory</span>
             </KeepQueryLink>
           </Menu.Item>
           <Menu.Item key="bundles">
@@ -48,10 +48,10 @@ export default function LayoutView(props) {
               <span className="nav-text">Bundles</span>
             </KeepQueryLink>
           </Menu.Item>
-          <Menu.Item key="inventory">
-            <KeepQueryLink to="/inventory">
-              <Icon type="database" />
-              <span className="nav-text">Inventory</span>
+          <Menu.Item key="foraging">
+            <KeepQueryLink to="/foraging">
+              <Icon type="environment" />
+              <span className="nav-text">Foraging</span>
             </KeepQueryLink>
           </Menu.Item>
         </Menu>
