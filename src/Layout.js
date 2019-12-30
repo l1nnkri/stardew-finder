@@ -1,9 +1,8 @@
 import { Layout, Menu, Icon } from 'antd';
 import React, { useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Store from './Store';
 import KeepQueryLink from './components/KeepQueryLink';
-import { storage } from './firebase';
 
 const { Header, Content, Footer, Sider } = Layout;
 

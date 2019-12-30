@@ -97,46 +97,6 @@ const BUNDLE_COUNT = {
   35: 3,
 };
 
-const ccMail = {
-  ccBoilerRoom: 3,
-  ccCraftsRoom: 1,
-  ccPantry: 0,
-  ccFishTank: 2,
-  ccVault: 4,
-  ccBulletin: 5,
-};
-
-// export function getBundleStatus(gameState) {
-//   const ccLoc = gameState.locations.GameLocation.find(
-//     c => c.name === 'CommunityCenter'
-//   );
-//   const bundlesHave = ccLoc.bundles.item.reduce((p, item) => {
-//     const id = item.key.int;
-//     const count = item.value.ArrayOfBoolean.boolean.reduce((p, c) => p + c, 0);
-//     p[id] = count;
-//     return p;
-//   }, {});
-
-//   const unfinishedRooms = Object.keys(ccMail).reduce((p, ccKey) => {
-//     const roomId = ccMail[ccKey];
-//     const room = ROOMS[roomId];
-//     p[room.name] = Object.keys(room.bundles)
-//       .map(bundleKey => {
-//         if (bundlesHave[bundleKey] >= BUNDLE_COUNT[bundleKey]) {
-//           return undefined;
-//         }
-//         const missing = BUNDLE_COUNT[bundleKey] - bundlesHave[bundleKey];
-//         return {
-//           name: room.bundles[bundleKey].trim(),
-//           missing,
-//         };
-//       })
-//       .filter(i => !!i);
-//     return p;
-//   }, {});
-//   return unfinishedRooms;
-// }
-
 export const getBundleStatus = gameState => {
   const ccLoc = gameState.locations.GameLocation.find(
     c => c.name === 'CommunityCenter'
