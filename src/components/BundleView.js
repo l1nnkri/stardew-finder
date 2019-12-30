@@ -4,6 +4,17 @@ import { getBundleStatus, canDeliverItem } from '../bundleUtils';
 import Store from '../Store';
 import Bundles from '../data/bundles.json';
 import { uniqBy } from 'lodash';
+import styled from 'styled-components';
+
+const WrapperDiv = styled.div`
+  .green-row {
+    background-color: #21af2159;
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: 12px 12px;
+  }
+`;
 
 const qualityIcons = {
   0: null,
@@ -86,11 +97,24 @@ export default function BundleView(props) {
   ];
 
   return (
-    <Table
-      dataSource={missingBundleItems}
-      rowKey="id"
-      columns={columns}
-      pagination={false}
-    />
+    <WrapperDiv>
+      <Table
+        dataSource={missingBundleItems}
+        rowKey="id"
+        columns={columns}
+        pagination={false}
+        rowClassName={record => {
+          const { nMissing, missingIngredients } = record;
+          if (
+            missingIngredients.reduce(
+              (p, c) => p + (c.deliverable ? 1 : 0),
+              0
+            ) >= nMissing
+          ) {
+            return 'green-row';
+          }
+        }}
+      />
+    </WrapperDiv>
   );
 }
