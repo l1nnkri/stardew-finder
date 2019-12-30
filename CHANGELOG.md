@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/martolini/stardew-finder/compare/v1.1.1...v1.2.0) (2019-12-30)
+
+
+### Features
+
+* Add bundle view ([a54f34e](https://github.com/martolini/stardew-finder/commit/a54f34eb6feeabf40b564915ae460a843991945e))
+
 ## [1.1.1](https://github.com/martolini/stardew-finder/compare/v1.1.0...v1.1.1) (2019-12-29)
 
 
