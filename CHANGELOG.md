@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/martolini/stardew-finder/compare/v1.2.0...v1.3.0) (2019-12-30)
+
+
+### Features
+
+* Add deliverable items ([8b1bf2c](https://github.com/martolini/stardew-finder/commit/8b1bf2cd380242c052542fe96307cb895f3a139a))
+
 # [1.2.0](https://github.com/martolini/stardew-finder/compare/v1.1.1...v1.2.0) (2019-12-30)
 
 
