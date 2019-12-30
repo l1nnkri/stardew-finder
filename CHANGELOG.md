@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/martolini/stardew-finder/compare/v1.8.0...v1.8.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* Correct prices in inventory ([0feceaa](https://github.com/martolini/stardew-finder/commit/0feceaa9e9a4003f9f2405d71619c7f9b7ff8d2c))
+
 # [1.8.0](https://github.com/martolini/stardew-finder/compare/v1.7.0...v1.8.0) (2019-12-30)
 
 
