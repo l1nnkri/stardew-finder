@@ -9,6 +9,13 @@ import Wikify from './Wikify';
 
 const { Search } = Input;
 
+const qualityPercentageBoost = {
+  0: 1,
+  1: 1.25,
+  2: 1.5,
+  3: 2,
+};
+
 export default function InventoryView(props) {
   const [searchTerm, setSearchTerm] = useState();
   const store = Store.useStore();
@@ -59,7 +66,7 @@ export default function InventoryView(props) {
     {
       title: 'Price',
       dataIndex: 'price',
-      sorter: (a, b) => a.price - b.price,
+      sorter: (a, b) => +a.price - +b.price,
     },
   ];
 

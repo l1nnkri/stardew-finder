@@ -163,6 +163,19 @@ const findPaths = (
   return paths;
 };
 
+function calculatePrice(item) {
+  switch (item.quality) {
+    case 1:
+      return Math.floor(item.price * 1.25);
+    case 2:
+      return Math.floor(item.price * 1.5);
+    case 3:
+      return Math.floor(item.price * 2);
+    default:
+      return item.price;
+  }
+}
+
 export const getDeliverableItems = gameState => {
   // Find player inventory
   const playerItems = gameState.player.items.Item.filter(
@@ -172,7 +185,7 @@ export const getDeliverableItems = gameState => {
     stack: item.stack,
     id: item.parentSheetIndex,
     quality: item.quality,
-    price: item.price,
+    price: calculatePrice(item),
   }));
 
   // Find farmhands inventory
@@ -190,7 +203,7 @@ export const getDeliverableItems = gameState => {
           stack: item.stack,
           id: item.parentSheetIndex,
           quality: item.quality,
-          price: item.price,
+          price: calculatePrice(item),
         }));
     })
     .reduce((p, c) => [...p, ...c], []);
@@ -211,7 +224,7 @@ export const getDeliverableItems = gameState => {
         stack: item.stack,
         id: item.parentSheetIndex,
         quality: item.quality,
-        price: item.price,
+        price: calculatePrice(item),
       }))
     )
     .reduce((p, c) => [...p, ...c], []);
