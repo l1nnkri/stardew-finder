@@ -37,7 +37,7 @@ class HandleFileDrop extends React.Component {
       money: json.SaveGame.player.money,
       gameId: json.SaveGame.uniqueIDForThisGame,
     };
-    info.id = `${info.id}-${info.dayOfMonth}-${info.currentSeason}-${info.year}`;
+    info.id = `${info.gameId}-${info.dayOfMonth}-${info.currentSeason}-${info.year}`;
     this.props.store.set('info')(info);
     // Parse locations
     const locations = json.SaveGame.locations.GameLocation.filter(
@@ -70,7 +70,11 @@ class HandleFileDrop extends React.Component {
     );
     window.gameState = json.SaveGame;
     this.setState({ isDraggingFile: false });
-    return json.SaveGame;
+    return {
+      gameState: json.SaveGame,
+      locations,
+      info,
+    };
   }
 
   onDrop = async ev => {
