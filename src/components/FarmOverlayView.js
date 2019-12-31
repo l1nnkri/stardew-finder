@@ -17,6 +17,9 @@ const PlacedDiv = styled.div`
   font-weight: 800;
   background-color: ${({ c }) =>
     c.dead ? '#111111' : c.done ? '#2ECC40' : '#FF4136'};
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export default function FarmOverlayView(props) {

@@ -23,6 +23,8 @@ const filterObjectsByName = (location, name) =>
         x: feature.key.Vector2.X,
         y: feature.key.Vector2.Y,
         done: minutesUntilReady === 0,
+        hoursUntilReady: Math.round(minutesUntilReady / 60),
+        minutesUntilReady,
       };
     });
 
@@ -45,6 +47,8 @@ const findInBuildings = (location, building, names = []) => {
           x: item.key.Vector2.X,
           y: item.key.Vector2.Y,
           done: minutesUntilReady === 0,
+          hoursUntilReady: Math.round(minutesUntilReady / 60),
+          minutesUntilReady,
         };
       });
     return [...p, ...objects];
