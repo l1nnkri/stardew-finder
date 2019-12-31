@@ -8,6 +8,7 @@ import Mountain from './img/Mountain.png';
 import PelicanTown from './img/Pelican_Town.png';
 import Woods from './img/Woods.png';
 
+/* eslint-disable */
 export const MAP_SIZES = {
   AnimalShop: { x: 35, y: 20 },
   ArchaeologyHouse: { x: 50, y: 20 },
@@ -346,6 +347,7 @@ export const MAP_SIZES = {
   Trailer: { x: 20, y: 12 },
   Woods: { x: 60, y: 32 },
 };
+/* eslint-enable */
 
 export const MAP_IMAGES = {
   Beach: Beach,
@@ -394,6 +396,7 @@ const forageItems = [
 
 export const isForageItem = item => forageItems.includes(item);
 
+/* eslint-disable */
 export const RECIPE_NAME_TABLE = {
   '8': 'Scarecrow',
   '9': 'Lightning Rod',
@@ -1065,6 +1068,7 @@ export const ID_TABLE = {
   'Cactus Seeds': 802,
   'Iridium Milk': 803,
 };
+/* eslint-enable */
 
 export const REVERSE_ID_TABLE = Object.keys(ID_TABLE).reduce((p, c) => {
   p[ID_TABLE[c]] = c;

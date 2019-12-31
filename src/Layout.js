@@ -72,12 +72,7 @@ export default function LayoutView(props) {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          <p>
-            {'martolini <3 stardew'} -{' '}
-            <a href="" target="blank">
-              Download gamestate here
-            </a>
-          </p>
+          <p>{'martolini <3 stardew'}</p>
         </Footer>
       </Layout>
     </Layout>

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import farmUrl from '../img/Farm.png';
 import Store from '../Store';
 import { REVERSE_ID_TABLE, MAP_SIZES } from '../utils';
-import { Tooltip, Checkbox, Popover, Divider } from 'antd';
-import ReactJsonView from 'react-json-view';
+import { Checkbox, Divider } from 'antd';
+import FarmOverlayView from './FarmOverlayView';
 
 const filterObjectsByName = (location, name) =>
   location.objects.item
@@ -64,13 +64,11 @@ export default function FarmView(props) {
   if (!location) {
     return (
       <div>
-        <img src={farmUrl} style={{ maxWidth: '100%' }} />
+        <img src={farmUrl} style={{ maxWidth: '100%' }} alt="farm" />
       </div>
     );
   }
   const mapSize = MAP_SIZES['Farm'];
-
-  const tileSize = 100 / MAP_SIZES['Farm'].x;
 
   let tappers = filterObjectsByName(location, 'Tapper');
   let preservesJars = filterObjectsByName(location, 'Preserves Jar');
@@ -178,48 +176,19 @@ export default function FarmView(props) {
           display: 'inline-block',
         }}
       >
-        <img src={farmUrl} style={{ maxWidth: '100%', opacity: '50%' }} />
-        {allObjects
-          .filter(c =>
+        <img
+          src={farmUrl}
+          style={{ maxWidth: '100%', opacity: '100%' }}
+          alt="farm"
+        />
+        <FarmOverlayView
+          items={allObjects.filter(c =>
             c.name === undefined
               ? checked.includes('undefined')
               : checked.includes(c.name)
-          )
-          .map((c, i) => (
-            <Tooltip title={`${c.name} [${c.daysToHarvest}]`} key={i}>
-              <Popover
-                content={
-                  <ReactJsonView
-                    src={c}
-                    name={false}
-                    collapsed={1}
-                    displayDataTypes={false}
-                    displayObjectSize={false}
-                  />
-                }
-                title={c.name}
-                trigger="click"
-                placement="bottom"
-              >
-                <div
-                  style={{
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    fontSize: '0.45rem',
-                    height: `${(tileSize * mapSize.x) / mapSize.y}%`,
-                    border: '1px solid black',
-                    left: `${(c.x / mapSize.x) * 100}%`,
-                    top: `${(c.y / mapSize.y) * 100}%`,
-                    position: 'absolute',
-                    width: `${tileSize}%`,
-                    color: c.dead ? '#000' : c.done ? '#52c41a' : 'red',
-                  }}
-                >
-                  {c.dead ? 'X' : c.daysToHarvest}
-                </div>
-              </Popover>
-            </Tooltip>
-          ))}
+          )}
+          mapSize={mapSize}
+        />
       </div>
     </div>
   );
