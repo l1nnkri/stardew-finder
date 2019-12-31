@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { groupBy } from 'lodash';
+import { groupBy, uniqBy } from 'lodash';
 import { Table, Input } from 'antd';
 import { getDeliverableItems } from '../bundleUtils';
 import Store from '../Store';
@@ -8,13 +8,6 @@ import TableWrapper from './TableWrapper';
 import Wikify from './Wikify';
 
 const { Search } = Input;
-
-const qualityPercentageBoost = {
-  0: 1,
-  1: 1.25,
-  2: 1.5,
-  3: 2,
-};
 
 export default function InventoryView(props) {
   const [searchTerm, setSearchTerm] = useState();
@@ -67,6 +60,16 @@ export default function InventoryView(props) {
       title: 'Price',
       dataIndex: 'price',
       sorter: (a, b) => +a.price - +b.price,
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      filters: uniqBy(dataSource, item => item.type)
+        .map(item => item.type)
+        .sort((a, b) => a.localeCompare(b))
+        .filter(t => t)
+        .map(t => ({ text: t, value: t })),
+      onFilter: (value, record) => record.type === value,
     },
   ];
 

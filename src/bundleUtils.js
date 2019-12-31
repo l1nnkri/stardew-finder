@@ -176,17 +176,22 @@ function calculatePrice(item) {
   }
 }
 
-export const getDeliverableItems = gameState => {
-  // Find player inventory
-  const playerItems = gameState.player.items.Item.filter(
-    item => item['@_xsi:nil'] !== true
-  ).map(item => ({
+function parseItem(item) {
+  return {
     name: item.name,
     stack: item.stack,
     id: item.parentSheetIndex,
     quality: item.quality,
     price: calculatePrice(item),
-  }));
+    type: item.type,
+  };
+}
+
+export const getDeliverableItems = gameState => {
+  // Find player inventory
+  const playerItems = gameState.player.items.Item.filter(
+    item => item['@_xsi:nil'] !== true
+  ).map(parseItem);
 
   // Find farmhands inventory
   const farmhands = findPaths(gameState, 'farmhand').map(path =>
@@ -196,15 +201,7 @@ export const getDeliverableItems = gameState => {
   const farmhandItems = farmhands
     .map(farmhand => {
       const items = farmhand.items.Item;
-      return items
-        .filter(item => item['@_xsi:nil'] !== true)
-        .map(item => ({
-          name: item.name,
-          stack: item.stack,
-          id: item.parentSheetIndex,
-          quality: item.quality,
-          price: calculatePrice(item),
-        }));
+      return items.filter(item => item['@_xsi:nil'] !== true).map(parseItem);
     })
     .reduce((p, c) => [...p, ...c], []);
 
@@ -218,15 +215,7 @@ export const getDeliverableItems = gameState => {
     )
     .map(chest => (chest.items === '' ? [] : chest.items.Item))
     .filter(chest => chest.length > 0)
-    .map(chest =>
-      chest.map(item => ({
-        name: item.name,
-        stack: item.stack,
-        id: item.parentSheetIndex,
-        quality: item.quality,
-        price: calculatePrice(item),
-      }))
-    )
+    .map(chest => chest.map(parseItem))
     .reduce((p, c) => [...p, ...c], []);
 
   return [...playerItems, ...farmhandItems, ...chestItems].reduce((p, c) => {
