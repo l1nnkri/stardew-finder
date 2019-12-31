@@ -94,6 +94,9 @@ class HandleFileDrop extends React.Component {
           const state = await this.goCrazyWithJson(json);
           // Upload if it doesn't exist
           const ref = storage.ref().child(`farms/${state.info.id}`);
+          this.props.history.push(
+            `${this.props.location.pathname}?id=${state.info.id}`
+          );
           try {
             await ref.getDownloadURL();
           } catch (ex) {
@@ -101,9 +104,6 @@ class HandleFileDrop extends React.Component {
               contentType: 'application/json',
             });
           }
-          this.props.history.push(
-            `${this.props.location.pathname}?id=${state.info.id}`
-          );
         };
         reader.readAsText(file);
       }
