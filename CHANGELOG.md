@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/martolini/stardew-finder/compare/v1.9.0...v1.9.1) (2019-12-31)
+
+
+### Bug Fixes
+
+* New colors on farmview ([39cb2bb](https://github.com/martolini/stardew-finder/commit/39cb2bb10866c3fc5a78d42f20dcdd28c3369200))
+
 # [1.9.0](https://github.com/martolini/stardew-finder/compare/v1.8.1...v1.9.0) (2019-12-31)
 
 
