@@ -177,6 +177,7 @@ export default function FarmView(props) {
           top: 0,
           left: 0,
           width: '80%',
+          float: 'right',
           display: 'inline-block',
         }}
       >
@@ -194,6 +195,7 @@ export default function FarmView(props) {
           mapSize={mapSize}
         />
       </div>
+      <div style={{ clear: 'both' }} />
     </div>
   );
 }

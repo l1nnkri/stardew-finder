@@ -11,9 +11,8 @@ const PlacedDiv = styled.div`
   position: absolute;
   height: ${props => (props.tileSize * props.mapSize.x) / props.mapSize.y}%;
   width: ${props => props.tileSize}%;
-  // color: ${({ c }) => (c.dead ? '#000' : c.done ? '#52c41a' : 'red')};
   color: white;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   font-weight: 800;
   background-color: ${({ c }) =>
     c.dead ? '#111111' : c.done ? '#2ECC40' : '#FF4136'};
