@@ -102,6 +102,7 @@ class HandleFileDrop extends React.Component {
           } catch (ex) {
             await ref.putString(JSON.stringify(json), undefined, {
               contentType: 'application/json',
+              cacheControl: 'max-age=43200',
             });
           }
         };
