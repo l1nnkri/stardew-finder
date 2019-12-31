@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/martolini/stardew-finder/compare/v1.10.0...v1.11.0) (2019-12-31)
+
+
+### Features
+
+* New font and style ([1fb879a](https://github.com/martolini/stardew-finder/commit/1fb879adac33b96c7367b12e6c4401f39f05ed5c))
+
 # [1.10.0](https://github.com/martolini/stardew-finder/compare/v1.9.3...v1.10.0) (2019-12-31)
 
 
