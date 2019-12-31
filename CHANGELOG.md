@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/martolini/stardew-finder/compare/v1.11.0...v1.12.0) (2019-12-31)
+
+
+### Features
+
+* Add money to top bar ([0bc2a11](https://github.com/martolini/stardew-finder/commit/0bc2a11f6fac99232e29a436dfbac56f528e49f1))
+
 # [1.11.0](https://github.com/martolini/stardew-finder/compare/v1.10.0...v1.11.0) (2019-12-31)
 
 
