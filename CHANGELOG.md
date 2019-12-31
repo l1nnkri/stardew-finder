@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/martolini/stardew-finder/compare/v1.8.1...v1.9.0) (2019-12-31)
+
+
+### Features
+
+* Add item type and filter ([6ee19a0](https://github.com/martolini/stardew-finder/commit/6ee19a09aa9e9281b734d15d92179bc5da184bcc))
+
 ## [1.8.1](https://github.com/martolini/stardew-finder/compare/v1.8.0...v1.8.1) (2019-12-30)
 
 
