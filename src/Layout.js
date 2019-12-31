@@ -1,4 +1,4 @@
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Tag } from 'antd';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Store from './Store';
@@ -95,11 +95,16 @@ export default function LayoutView(props) {
             style={{ background: '#fff', padding: 0, paddingLeft: '15px' }}
           >
             <h2>
-              <span>
-                {info.farmName} farm - {info.currentSeason} {info.dayOfMonth} -
-                Year {info.year} -{' '}
-                {Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}% luck
-              </span>
+              {`${info.farmName} farm`}
+              <Tag
+                style={{ marginLeft: 25 }}
+                color="orange"
+              >{`${info.currentSeason} ${info.dayOfMonth}`}</Tag>
+              <Tag color="magenta">Year {info.year}</Tag>
+              <Tag color="gold">
+                {`${Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}% luck`}
+              </Tag>
+              <Tag color="green">{info.money}💰</Tag>
             </h2>
           </Header>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
