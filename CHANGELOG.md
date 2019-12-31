@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/martolini/stardew-finder/compare/v1.12.2...v1.13.0) (2019-12-31)
+
+
+### Features
+
+* Add caching to static files ([1f90d82](https://github.com/martolini/stardew-finder/commit/1f90d82918110426fb710167bd09ea27715191e7))
+
 ## [1.12.2](https://github.com/martolini/stardew-finder/compare/v1.12.1...v1.12.2) (2019-12-31)
 
 
