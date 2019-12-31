@@ -1,3 +1,15 @@
+## [1.12.2](https://github.com/martolini/stardew-finder/compare/v1.12.1...v1.12.2) (2019-12-31)
+
+
+### Bug Fixes
+
+* Fix the id structure ([c9b91fd](https://github.com/martolini/stardew-finder/commit/c9b91fda2e522782efc5793e1388af9a55698525))
+
+
+### Performance Improvements
+
+* Update query param optimistically ([52dfe94](https://github.com/martolini/stardew-finder/commit/52dfe94330fd7fb12458fc1b7855af55c6bb5eb1))
+
 ## [1.12.1](https://github.com/martolini/stardew-finder/compare/v1.12.0...v1.12.1) (2019-12-31)
 
 
