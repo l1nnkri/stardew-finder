@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/martolini/stardew-finder/compare/v1.9.1...v1.9.2) (2019-12-31)
+
+
+### Bug Fixes
+
+* Add hover effect to farm tiles and hoursUntilReady ([6fa1261](https://github.com/martolini/stardew-finder/commit/6fa126101acab7c4c36b1877ac37cfc9bcf9998d))
+
 ## [1.9.1](https://github.com/martolini/stardew-finder/compare/v1.9.0...v1.9.1) (2019-12-31)
 
 
