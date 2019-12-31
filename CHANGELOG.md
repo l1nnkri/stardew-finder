@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/martolini/stardew-finder/compare/v1.12.0...v1.12.1) (2019-12-31)
+
+
+### Performance Improvements
+
+* Upload to deterministic storage ref ([5c3f002](https://github.com/martolini/stardew-finder/commit/5c3f0028a698c43c9144ace73643f563bf364ad9))
+
 # [1.12.0](https://github.com/martolini/stardew-finder/compare/v1.11.0...v1.12.0) (2019-12-31)
 
 
