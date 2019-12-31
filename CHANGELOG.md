@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/martolini/stardew-finder/compare/v1.9.2...v1.9.3) (2019-12-31)
+
+
+### Bug Fixes
+
+* Update Readme (force deploy) ([8908377](https://github.com/martolini/stardew-finder/commit/8908377f06d8dd9817f496b4228c455c5f86fd3b))
+
 ## [1.9.2](https://github.com/martolini/stardew-finder/compare/v1.9.1...v1.9.2) (2019-12-31)
 
 
