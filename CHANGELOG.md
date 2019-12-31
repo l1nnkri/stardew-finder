@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/martolini/stardew-finder/compare/v1.9.3...v1.10.0) (2019-12-31)
+
+
+### Features
+
+* Added userview with skills ([e8f72f2](https://github.com/martolini/stardew-finder/commit/e8f72f2b82a32554241be14d456b647a50779aa2))
+
 ## [1.9.3](https://github.com/martolini/stardew-finder/compare/v1.9.2...v1.9.3) (2019-12-31)
 
 
