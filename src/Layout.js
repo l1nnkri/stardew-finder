@@ -104,7 +104,12 @@ export default function LayoutView(props) {
               <Tag color="gold">
                 {`${Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}% luck`}
               </Tag>
-              <Tag color="green">{info.money}💰</Tag>
+              <Tag color="green">
+                {info.money}
+                <span role="img" aria-label="money">
+                  💰
+                </span>
+              </Tag>
             </h2>
           </Header>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>

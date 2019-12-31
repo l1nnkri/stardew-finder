@@ -6,7 +6,6 @@ import Store from '../Store';
 import qs from 'query-string';
 import { storage } from '../firebase';
 import axios from 'axios';
-import hash from 'hash-sum';
 import { getDeliverableItems } from '../bundleUtils';
 
 class HandleFileDrop extends React.Component {
@@ -36,7 +35,9 @@ class HandleFileDrop extends React.Component {
       year: json.SaveGame.year,
       farmName: json.SaveGame.player.farmName,
       money: json.SaveGame.player.money,
+      gameId: json.SaveGame.uniqueIDForThisGame,
     };
+    info.id = `${info.id}-${info.dayOfMonth}-${info.currentSeason}-${info.year}`;
     this.props.store.set('info')(info);
     // Parse locations
     const locations = json.SaveGame.locations.GameLocation.filter(
@@ -69,6 +70,7 @@ class HandleFileDrop extends React.Component {
     );
     window.gameState = json.SaveGame;
     this.setState({ isDraggingFile: false });
+    return json.SaveGame;
   }
 
   onDrop = async ev => {
@@ -85,10 +87,9 @@ class HandleFileDrop extends React.Component {
             parseAttributeValue: true,
           });
           // Parse main info
-          await this.goCrazyWithJson(json);
-          const fileHash = hash(json);
+          const state = await this.goCrazyWithJson(json);
           // Upload if it doesn't exist
-          const ref = storage.ref().child(`farms/${fileHash}`);
+          const ref = storage.ref().child(`farms/${state.info.id}`);
           try {
             await ref.getDownloadURL();
           } catch (ex) {
@@ -97,7 +98,7 @@ class HandleFileDrop extends React.Component {
             });
           }
           this.props.history.push(
-            `${this.props.location.pathname}?id=${fileHash}`
+            `${this.props.location.pathname}?id=${state.info.id}`
           );
         };
         reader.readAsText(file);
