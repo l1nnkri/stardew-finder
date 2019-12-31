@@ -34,6 +34,7 @@ class HandleFileDrop extends React.Component {
       dayOfMonth: json.SaveGame.dayOfMonth,
       dailyLuck: json.SaveGame.dailyLuck,
       year: json.SaveGame.year,
+      farmName: json.SaveGame.player.farmName,
     };
     this.props.store.set('info')(info);
     // Parse locations

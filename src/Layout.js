@@ -60,9 +60,9 @@ export default function LayoutView(props) {
         <Header style={{ background: '#fff', padding: 0, paddingLeft: '15px' }}>
           <h2>
             <span>
-              Tegridy Farms - {info.currentSeason} {info.dayOfMonth} - Year{' '}
-              {info.year} - {Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}%
-              luck
+              {info.farmName} farm - {info.currentSeason} {info.dayOfMonth} -
+              Year {info.year} -{' '}
+              {Math.round(((+info.dailyLuck + 0.1) / 0.2) * 100)}% luck
             </span>
           </h2>
         </Header>
