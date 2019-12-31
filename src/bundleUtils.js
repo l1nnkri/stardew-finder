@@ -244,3 +244,16 @@ export const canDeliverItem = (deliverableItems, itemId, stack, quality) => {
   }
   return false;
 };
+
+export function getPlayers(gameState) {
+  const players = [
+    gameState.player,
+    ...findPaths(gameState, 'farmhand')
+      .map(path => path.split('/').reduce((p, c) => p[c], gameState))
+      .filter(t => t.name),
+  ];
+  return players.reduce((p, player) => {
+    p[player.name] = player;
+    return p;
+  }, {});
+}

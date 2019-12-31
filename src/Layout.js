@@ -54,6 +54,12 @@ export default function LayoutView(props) {
               <span className="nav-text">Foraging</span>
             </KeepQueryLink>
           </Menu.Item>
+          <Menu.Item key="skills">
+            <KeepQueryLink to="/skills">
+              <Icon type="user" />
+              <span className="nav-text">Skills</span>
+            </KeepQueryLink>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>

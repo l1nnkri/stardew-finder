@@ -1,0 +1,72 @@
+import React from 'react';
+import { Progress } from 'antd';
+import Store from '../Store';
+import { getPlayers } from '../bundleUtils';
+
+const SKILL_TABLE = {
+  0: 'Farming',
+  1: 'Fishing',
+  2: 'Foraging',
+  3: 'Mining',
+  4: 'Combat',
+};
+
+const EXP_TABLE = {
+  0: 0,
+  1: 100,
+  2: 380,
+  3: 770,
+  4: 1300,
+  5: 2150,
+  6: 3300,
+  7: 4800,
+  8: 6900,
+  9: 10000,
+  10: 15000,
+};
+
+export default function PlayerView(props) {
+  const store = Store.useStore();
+  const gameState = store.get('gameState');
+  if (Object.keys(gameState).length === 0) {
+    return null;
+  }
+  const players = getPlayers(gameState);
+  const renderObject = Object.keys(players).map(playerName => {
+    const player = players[playerName];
+    const {
+      experiencePoints: { int: experiencePoints },
+    } = player;
+    const levels = Object.keys(SKILL_TABLE).map(skillKey => {
+      const skillName = SKILL_TABLE[skillKey];
+      const stateKey = `${skillName.toLowerCase()}Level`;
+      const level = player[stateKey];
+      const exp = EXP_TABLE[level];
+      const nextExp = EXP_TABLE[level + 1];
+      const percentage =
+        level === 10
+          ? 100
+          : ((experiencePoints[skillKey] - exp) / (nextExp - exp)) * 100;
+      return (
+        <div key={skillKey} style={{ display: 'inline-block' }}>
+          <span style={{ paddingRight: 10 }}>
+            {skillName}: {level}
+          </span>
+          <Progress
+            type="circle"
+            key={skillKey}
+            percent={Math.round(percentage)}
+            style={{ paddingRight: 10 }}
+          />
+        </div>
+      );
+    });
+    return (
+      <div key={playerName} style={{ display: 'inline-block' }}>
+        <h1>{playerName}</h1>
+        {levels}
+      </div>
+    );
+  });
+  return <div>{renderObject}</div>;
+}

@@ -8,6 +8,7 @@ import BundleView from './components/BundleView';
 import Store from './Store';
 import { hot } from 'react-hot-loader/root';
 import InventoryView from './components/InventoryView';
+import PlayerView from './components/PlayerView';
 
 function Main() {
   return <h1>Please drop a savefile in here anywhere</h1>;
@@ -25,6 +26,7 @@ function App() {
               <Route path={`/farm`} component={FarmView} exact />
               <Route path={`/bundles`} component={BundleView} exact />
               <Route path={`/inventory`} component={InventoryView} exact />
+              <Route path={`/skills`} component={PlayerView} exact />
             </Switch>
           </Layout>
         </HandleFileDrop>
