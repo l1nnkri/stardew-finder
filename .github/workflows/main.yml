@@ -24,12 +24,16 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
+        name: Install dependencies
       - run: CI=true yarn test
+        name: Test
       - run: NODE_ENV=production yarn build
-      - run: npx surge build --domain=https://stardew-help.surge.sh --token=${{ secrets.SURGE_TOKEN }}
-      - name: semantic-release
+        name: Build
+      - name: Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SEMANTIC_RELEASE_PACKAGE: stardew-finder
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          SURGE_ALIAS: stardew-help.surge.sh
         run: npx semantic-release

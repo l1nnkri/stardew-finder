@@ -18,6 +18,14 @@
         "notifyOnFail": true,
         "markdownReleaseNotes": true
       }
+    ],
+    [
+      "@eclass/semantic-release-surge",
+      {
+        "alias": "stardew-help.surge.sh",
+        "assets": "build",
+        "build": false
+      }
     ]
   ]
 }
