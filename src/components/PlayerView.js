@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress } from 'antd';
+import { Progress, Row, Col } from 'antd';
 import Store from '../Store';
 import { getPlayers } from '../bundleUtils';
 
@@ -48,23 +48,21 @@ export default function PlayerView(props) {
           ? 100
           : ((experiencePoints[skillKey] - exp) / (nextExp - exp)) * 100;
       return (
-        <div key={skillKey} style={{ display: 'inline-block' }}>
-          <span style={{ paddingRight: 10 }}>
-            {skillName}: {level}
-          </span>
+        <Col span={4} key={skillKey}>
+          {skillName}: {level}
           <Progress
             type="circle"
             key={skillKey}
             percent={Math.round(percentage)}
-            style={{ paddingRight: 10 }}
+            style={{ paddingLeft: 10 }}
           />
-        </div>
+        </Col>
       );
     });
     return (
-      <div key={playerName} style={{ display: 'inline-block' }}>
+      <div key={playerName}>
         <h1>{playerName}</h1>
-        {levels}
+        <Row>{levels}</Row>
       </div>
     );
   });
