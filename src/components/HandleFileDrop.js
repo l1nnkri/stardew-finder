@@ -37,7 +37,7 @@ class HandleFileDrop extends React.Component {
       money: json.SaveGame.player.money,
       gameId: json.SaveGame.uniqueIDForThisGame,
     };
-    info.id = `${info.gameId}-${info.dayOfMonth}-${info.currentSeason}-${info.year}`;
+    info.id = `${info.gameId}-${info.year}-${info.currentSeason}-${info.dayOfMonth}`;
     this.props.store.set('info')(info);
     // Parse locations
     const locations = json.SaveGame.locations.GameLocation.filter(
