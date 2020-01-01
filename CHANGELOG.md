@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/martolini/stardew-finder/compare/v1.13.1...v1.13.2) (2020-01-01)
+
+
+### Bug Fixes
+
+* Use semantic-release to deploy to surge ([f32b3db](https://github.com/martolini/stardew-finder/commit/f32b3db2a8f109b2ddd5743e79510f224b0318eb))
+
 ## [1.13.1](https://github.com/martolini/stardew-finder/compare/v1.13.0...v1.13.1) (2020-01-01)
 
 
