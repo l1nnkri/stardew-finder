@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/martolini/stardew-finder/compare/v1.13.2...v1.13.3) (2020-01-01)
+
+
+### Bug Fixes
+
+* Updated favicons ([f85fa5d](https://github.com/martolini/stardew-finder/commit/f85fa5d59122e19d765c0cf914c0969930e713e9))
+
 ## [1.13.2](https://github.com/martolini/stardew-finder/compare/v1.13.1...v1.13.2) (2020-01-01)
 
 
