@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/martolini/stardew-finder/compare/v1.13.0...v1.13.1) (2020-01-01)
+
+
+### Bug Fixes
+
+* Change id structure to have day last ([7c45100](https://github.com/martolini/stardew-finder/commit/7c45100b8e509e91d1a0a3ae921b73f2bcfebf54))
+
 # [1.13.0](https://github.com/martolini/stardew-finder/compare/v1.12.2...v1.13.0) (2019-12-31)
 
 
